@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-blue: #353060;
+  --bg-dark-blue: #1e1c39;
+  --btn-green: #2fca8f;
+  --text-pink: #c63d55;
+}
+
+.content-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+}
