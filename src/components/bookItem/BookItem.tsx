@@ -38,10 +38,9 @@ function BookItem({book, addToCart, removeFromCart}: Props) {
                 <p className="book-desc">{book.desc}</p>
                 <h1 className="book-genre">{book.genre}</h1>
                 <div className="book-counter">
-                    <button onClick={decreaseBookBalance}>-</button>
+                    <button onClick={decreaseBookBalance} className="add-book-btn">remove book</button>
                     <p>{bookBalance}</p>
-                    <button onClick={increaseBookBalance}>+</button>
-                    {/*<button onClick={addToCart} className="add-book-btn">Add card</button>*/}
+                    <button onClick={increaseBookBalance} className="add-book-btn">add book</button>
                 </div>
             </article>
         </div>
