@@ -1,7 +1,8 @@
 import './bookItem.css';
+import {useState} from "react";
 
 type Book = {
-    title : string,
+    title: string,
     "author": string,
     "pages": number,
     "genre": string,
@@ -9,11 +10,26 @@ type Book = {
 }
 
 type Props = {
-    book : Book,
-    addToCart : () => void
+    book: Book,
+    addToCart: () => void,
+    removeFromCart: () => void
 }
 
-function BookItem({book, addToCart } : Props) {
+function BookItem({book, addToCart, removeFromCart}: Props) {
+    const [bookBalance, setBookBalance] = useState<number>(0);
+
+    const decreaseBookBalance = () => {
+        if (bookBalance > 0) {
+            setBookBalance(b => b - 1);
+            removeFromCart();
+        }
+    }
+
+    const increaseBookBalance = () => {
+        setBookBalance(b => b + 1);
+        addToCart();
+    }
+
     return (
         <div>
             <article className="book">
@@ -21,7 +37,12 @@ function BookItem({book, addToCart } : Props) {
                 <h1 className="book-author">{book.author}</h1>
                 <p className="book-desc">{book.desc}</p>
                 <h1 className="book-genre">{book.genre}</h1>
-                <button onClick={addToCart} className="add-book-btn">Add card</button>
+                <div className="book-counter">
+                    <button onClick={decreaseBookBalance}>-</button>
+                    <p>{bookBalance}</p>
+                    <button onClick={increaseBookBalance}>+</button>
+                    {/*<button onClick={addToCart} className="add-book-btn">Add card</button>*/}
+                </div>
             </article>
         </div>
     );
