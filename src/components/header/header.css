@@ -1,0 +1,16 @@
+.page-header {
+    background-color: var(--bg-dark-blue);
+    padding: 1rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-icon {
+    color: white;
+    font-size: 3rem;
+    width: 2rem;
+    height: auto;
+}
