@@ -1,15 +1,41 @@
 import { create } from "zustand";
+import BookType from "../models/Book.ts"
 
 type CartStore = {
-    cart : number,
-    increment : () => void,
-    decrement : () => void
+    cart : BookType[],
+    addBooks : (books : BookType[]) => void,
+    increaseQty : (title : string) => void,
+    decreaseQty : (title : string) => void
 }
 
 const useCartStore = create<CartStore>((set) => ({
-    cart : 0,
-    increment : () => set(state => ({ cart : state.cart + 1})),
-    decrement : () => set(state => ({ cart : state.cart - 1}))
+    cart : [],
+    addBooks : (books) => {
+        const booksWithQty = books.map(book => ({...book, qty: 0}))
+        set({ cart : booksWithQty});
+    },
+
+    increaseQty : (title) => {
+        set(state => ({
+            cart : state.cart.map(book => {
+                if(book.title === title) {
+                    return { ...book, qty : (book.qty?? 0)  + 1};
+                }
+                return book;
+            })
+        }))
+    },
+    decreaseQty : (title) => {
+        set(state => ({
+            cart : state.cart.map(book => {
+                if(book.title === title) {
+                    const newQty = Math.max(0, (book.qty?? 0) - 1)
+                    return { ...book, qty : newQty};
+                }
+                return book;
+            })
+        }))
+    }
 }));
 
 export default useCartStore;
