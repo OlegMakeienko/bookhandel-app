@@ -1,14 +1,13 @@
 import './cart.css';
+import useCartStore from "../../stores/cart-store.ts";
 
-type Props = {
-    cartItems : number
-}
+function Cart() {
+    const cart = useCartStore(state => state.cart);
 
-function Cart({cartItems}: Props) {
     return (
         <div className="cart">
             <p className="cart-text">Cart: </p>
-            <p className="cart-indicator">{cartItems}</p>
+            <p className="cart-indicator">{ cart }</p>
 
         </div>
     );

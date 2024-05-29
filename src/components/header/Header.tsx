@@ -1,16 +1,12 @@
 import './header.css';
 import Cart from "../cart/Cart.tsx";
 
-type Props = {
-    cartSize : number
-}
-
-function Header({cartSize} : Props) {
+function Header() {
     return (
         <header className="page-header">
             <div className="header content-wrapper">
                 <img className="book-icon" src="/src/assets/read-book-icon.svg" alt="icon"/>
-                <Cart cartItems={cartSize} />
+                <Cart />
             </div>
         </header>
     );

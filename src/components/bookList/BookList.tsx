@@ -10,12 +10,8 @@ type Book = {
     "desc": string
 }
 
-type BookListProps = {
-    addToCart : () => void,
-    removeFromCart : () => void
-}
 
-function BookList({addToCart, removeFromCart}: BookListProps) {
+function BookList() {
     const bookList: Book[] = [...bookJson];
 
     return (
@@ -24,7 +20,7 @@ function BookList({addToCart, removeFromCart}: BookListProps) {
                 {
                     bookList.map((book, index) => {
                         //return <p>{book.author}</p>
-                        return <BookItem key={index} book={book} addToCart={addToCart} removeFromCart={removeFromCart}/>
+                        return <BookItem key={ index } book={ book } />
                     })
                 }
             </div>
