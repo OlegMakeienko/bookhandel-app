@@ -1,5 +1,6 @@
 import './bookItem.css';
 import {useState} from "react";
+import useCartStore from "../../stores/cart-store.ts";
 
 type Book = {
     title: string,
@@ -10,24 +11,26 @@ type Book = {
 }
 
 type Props = {
-    book: Book,
-    addToCart: () => void,
-    removeFromCart: () => void
+    book: Book
 }
 
-function BookItem({book, addToCart, removeFromCart}: Props) {
+function BookItem({ book }: Props) {
     const [bookBalance, setBookBalance] = useState<number>(0);
+    const { increment, decrement } = useCartStore(state => ({
+        increment : state.increment,
+        decrement : state.decrement
+    }));
 
     const decreaseBookBalance = () => {
         if (bookBalance > 0) {
             setBookBalance(b => b - 1);
-            removeFromCart();
+            decrement();
         }
     }
 
     const increaseBookBalance = () => {
         setBookBalance(b => b + 1);
-        addToCart();
+        increment();
     }
 
     return (
