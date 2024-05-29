@@ -1,37 +1,17 @@
 import './bookItem.css';
-import {useState} from "react";
+import Book from "../../models/Book.ts";
 import useCartStore from "../../stores/cart-store.ts";
-
-type Book = {
-    title: string,
-    "author": string,
-    "pages": number,
-    "genre": string,
-    "desc": string
-}
 
 type Props = {
     book: Book
 }
 
 function BookItem({ book }: Props) {
-    const [bookBalance, setBookBalance] = useState<number>(0);
-    const { increment, decrement } = useCartStore(state => ({
-        increment : state.increment,
-        decrement : state.decrement
-    }));
 
-    const decreaseBookBalance = () => {
-        if (bookBalance > 0) {
-            setBookBalance(b => b - 1);
-            decrement();
-        }
-    }
-
-    const increaseBookBalance = () => {
-        setBookBalance(b => b + 1);
-        increment();
-    }
+    const { decreaseQty, increaseQty } = useCartStore(state =>({
+        decreaseQty : state.decreaseQty,
+        increaseQty : state.increaseQty
+    }))
 
     return (
         <div>
@@ -41,9 +21,9 @@ function BookItem({ book }: Props) {
                 <p className="book-desc">{book.desc}</p>
                 <h1 className="book-genre">{book.genre}</h1>
                 <div className="book-counter">
-                    <button onClick={decreaseBookBalance} className="add-book-btn">remove book</button>
-                    <p>{bookBalance}</p>
-                    <button onClick={increaseBookBalance} className="add-book-btn">add book</button>
+                    <button onClick={ () => decreaseQty(book.title) } className="add-book-btn">remove book</button>
+                    <p>{ book.qty }</p>
+                    <button onClick={ () => increaseQty(book.title) } className="add-book-btn">add book</button>
                 </div>
             </article>
         </div>
